@@ -11,6 +11,7 @@ class LinkedList:
         length = 0
         temp = self.head
         while temp:
+            temp = temp.next
             length += 1
         return length
 
@@ -22,47 +23,29 @@ class LinkedList:
             print("Nothing to display")
         else:
             temp = self.head
-            while temp:
+            while temp.next:
                 print(temp.data)
                 temp = temp.next
+            print(temp.data)
 
     def push(self, val):
-        temp = self.head
-        while temp:
+        if self.head is None:
+            self.head = Node(val)
+            return
+
+        temp = self.head # temp is pointing to the node. Make sure use temp to point to the node instead of node.next
+        while temp.next:
             temp = temp.next
-        
-        temp = Node(val)
-        return self
+
+        temp.next = Node(val)
 
 
 
 
 if __name__ == "__main__":
     ll = LinkedList()
-    while True:
-        print("1. Display\n2. Push\n3. Pop\n4. Enter at a particular index.\n5. Delete from a particular index.\n6. Break\n")
-        task = int(input("Enter operation"))
-
-        match task:
-            case 1:
-                ll.display()
-
-            case 2:
-                push_val = int(input("Enter value to push."))
-                ll.push(push_val)
-
-            case 3:
-                pop(ll)
-
-            case 4:
-                index = int(input("Enter index"))
-                val = int(input("Enter value"))
-                enter_at_index(ll, index, val)
-
-            case 5:
-                index = int(input("Enter index"))
-                del_from_index(ll, index)
-
-            case default:
-                break
+    ll.push(3)
+    ll.push(4)
+    ll.push(5)
+    ll.display()
 
